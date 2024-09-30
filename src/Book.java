@@ -18,6 +18,14 @@ public class Book extends CartItem {
         this.author = author;
     }
 
+    private void setTitle(String newTitle) {
+        super.itemName = newTitle;
+    }
+
+    private void setPrice(double newPrice){
+        super.price = newPrice;
+    }
+
     public int getYearPublished() {
         return yearPublished;
     }
@@ -34,7 +42,8 @@ public class Book extends CartItem {
         this.isPaperback = isPaperback;
     }
 
-    public String printCartItemDetails() {
+    @Override
+    public void printCartItemDetails() {
         System.out.println("Title: " + getName());  // Using getName() from the parent class
         System.out.println("Author: " + author);
         System.out.println("Year Published: " + yearPublished);
@@ -65,4 +74,5 @@ public class Book extends CartItem {
     public boolean isYearPublishedValid() {
         return yearPublished > 0;
     }
+
 }

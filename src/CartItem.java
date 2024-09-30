@@ -1,6 +1,6 @@
 public class CartItem {
-    private String itemName;
-    private double price;
+    public String itemName;
+    public double price;
     private int quantity;
 
     public CartItem(String itemName, double price, int quantity) {
@@ -33,6 +33,8 @@ public class CartItem {
         return price * quantity;
     }
 
-    public String printCartItemDetails();
+    public void printCartItemDetails(){
+        return;
+    }
 
 }
