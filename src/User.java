@@ -18,6 +18,14 @@ public class User {
         this.orders = new ArrayList<>();
     }
 
+    public Address getShipping(){
+        return this.shipping;
+    }
+
+    public Address getBilling(){
+        return this.billing;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,13 +43,13 @@ public class User {
     }
 
     public void addToCart(CartItem cartItem, int quantity) {
-        cart.addItem(new CartItem(cartItem.getTitle(), cartItem.getPrice(), quantity));
+        cart.addItem(new CartItem(cartItem.getName(), cartItem.getPrice(), quantity));
     }
 
     public void removeFromCart(CartItem cartItem) {
-        List<CartItem> itemsCopy = new ArrayList<>(cart.getItems());
+        ArrayList<CartItem> itemsCopy = new ArrayList<>(cart.getItems());
         for (CartItem item : itemsCopy) {
-            if (item.getName().equals(cartItem.getTitle())) {
+            if (item.getName().equals(cartItem.getName())) {
                 cart.getItems().remove(item);
                 break;
             }
@@ -58,7 +66,7 @@ public class User {
         LocalDate currentDate = LocalDate.now();
         Order order = new Order(cart, this);
         order.setOrderStatus("Order Placed");
-        order.setDateCreated(currentDate);
+        order.setDateCreated(currentDate.toString());
         orders.add(order);
     }
 }

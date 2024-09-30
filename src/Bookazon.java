@@ -1,5 +1,7 @@
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bookazon {
 
@@ -49,13 +51,19 @@ public class Bookazon {
         Bookazon bookazon = new Bookazon();
         
         // create books
-        bookazon.addCartItem(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925, 9.99, true));
-        bookazon.addCartItem(new Book("To Kill a Mockingbird", "Harper Lee", 1960, 7.99, false));
-        bookazon.addCartItem(new Book("1984", "George Orwell", 1949, 8.99, true));
+        bookazon.addCartItem(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925, 9.99, true, 1));
+        bookazon.addCartItem(new Book("To Kill a Mockingbird", "Harper Lee", 1960, 7.99, false, 1));
+        bookazon.addCartItem(new Book("1984", "George Orwell", 1949, 8.99, true, 1));
 
         // create users
-        bookazon.addUser(new User("Alice", "normal"));
-        bookazon.addUser(new User("Bob", "gold"));
+        ArrayList<String> A1 = new ArrayList<String>(Arrays.asList("9201 Hill", "9034 Hill", "Waterville", "ME", "04901", "USA"));
+        ArrayList<String> A2 = new ArrayList<String>(Arrays.asList("9233 Hill", "9037 Hill", "Waterville", "ME", "04901", "USA"));
+    
+
+        Address address1 = new Address(A1);
+        Address address2 = new Address(A2);
+        bookazon.addUser(new User("Alice", "normal", address1, address2));
+        bookazon.addUser(new User("Bob", "gold", address1, address2));
 
         // add books to cart
         bookazon.users.get(0).addToCart(bookazon.items.get(0), 1);

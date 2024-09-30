@@ -32,8 +32,8 @@ public class AudioBook extends CartItem {
         return audioDuration;
     }
 
-    public void setAudioDuration(int length) {
-        this.audioDuration = audioDuration;
+    public void setAudioDuration(int newAudioDuration) {
+        this.audioDuration = newAudioDuration;
     }
 
     public int getReleaseYear() {
@@ -47,7 +47,7 @@ public class AudioBook extends CartItem {
     public void printCartItemDetails() {
         System.out.println("Title: " + getName());  // Using getName() from the parent class
         System.out.println("Author: " + author);
-        System.out.println("Narrator: " + narrator);
+        System.out.println("Narrator: " + reader);
         System.out.println("Duration of audio: " + audioDuration + " minutes");
         System.out.println("Release Year: " + releaseYear);
         System.out.println("Price: $" + getPrice());  // Using getPrice() from the parent class
@@ -58,12 +58,8 @@ public class AudioBook extends CartItem {
         return author != null && !author.isEmpty();
     }
 
-    public boolean isNarratorValid() {
-        return narrator != null && !narrator.isEmpty();
-    }
-
-    public boolean isLengthValid() {
-        return length > 0;
+    public boolean isReaderValid() {
+        return reader != null && !reader.isEmpty();
     }
 
     public boolean isReleaseYearValid() {

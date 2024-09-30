@@ -44,7 +44,7 @@ public class Ebook extends CartItem {
         this.format = format;
     }
 
-    // Method to display Ebook details
+    @Override
     public void printCartItemDetails() {
         System.out.println("Title: " + getName());  // Using getName() from the parent class
         System.out.println("Author: " + author);

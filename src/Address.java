@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Address {
@@ -30,4 +29,29 @@ public class Address {
             throw new IllegalArgumentException("The address details is not correct. It should have 6 items");
         }
     }
+
+    public String getLine1(){
+        return this.line1;
+    }
+
+    public String getLine2(){
+        return this.line2;
+    }
+
+    public String getCity(){
+        return this.city;
+    }
+
+    public String getState(){
+        return this.state;
+    }
+
+    public String getZip(){
+        return this.zip;
+    }
+
+    public String getCountry(){
+        return this.country;
+    }
+
 }
