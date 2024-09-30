@@ -34,7 +34,7 @@ public class Book extends CartItem {
         this.isPaperback = isPaperback;
     }
 
-    public void printBookDetails() {
+    public String printCartItemDetails() {
         System.out.println("Title: " + getName());  // Using getName() from the parent class
         System.out.println("Author: " + author);
         System.out.println("Year Published: " + yearPublished);
