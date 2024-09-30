@@ -1,4 +1,4 @@
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User {
@@ -6,21 +6,13 @@ public class User {
     private String subscription;
     private Cart cart;
     private ArrayList<Order> orders;
-    private String shippingAddressLine1;
-    private String shippingAddressLine2;
-    private String shippingAddressCity;
-    private String shippingAddressState;
-    private String shippingAddressZip;
-    private String shippingAddressCountry;
-    private String billingAddressLine1;
-    private String billingAddressLine2;
-    private String billingAddressCity;
-    private String billingAddressState;
-    private String billingAddressZip;
-    private String billingAddressCountry;
+    private Address billing; 
+    private Address shipping; 
 
-    public User(String name, String subscription) {
+    public User(String name, String subscription, Address billing, Address shipping) {
         this.name = name;
+        this.billing = billing;
+        this.shipping = shipping;
         this.subscription = subscription;  // normal, gold, platinum, silver membership
         this.cart = new Cart();
         this.orders = new ArrayList<>();
@@ -42,31 +34,14 @@ public class User {
         cart.viewCartDetails();
     }
 
-    public void setShippingAddress(String line1, String line2, String city, String state, String zip, String country) {
-        this.shippingAddressLine1 = line1;
-        this.shippingAddressLine2 = line2;
-        this.shippingAddressCity = city;
-        this.shippingAddressState = state;
-        this.shippingAddressZip = zip;
-        this.shippingAddressCountry = country;
+    public void addToCart(CartItem cartItem, int quantity) {
+        cart.addItem(new CartItem(cartItem.getTitle(), cartItem.getPrice(), quantity));
     }
 
-    public void setBillingAddress(String line1, String line2, String city, String state, String zip, String country) {
-        this.billingAddressLine1 = line1;
-        this.billingAddressLine2 = line2;
-        this.billingAddressCity = city;
-        this.billingAddressState = state;
-        this.billingAddressZip = zip;
-        this.billingAddressCountry = country;
-    }
-
-    public void addToCart(Book book, int quantity) {
-        cart.addItem(new CartItem(book.getTitle(), book.getPrice(), quantity));
-    }
-
-    public void removeFromCart(Book book) {
-        for (CartItem item : cart.getItems()) {
-            if (item.getName().equals(book.getTitle())) {
+    public void removeFromCart(CartItem cartItem) {
+        List<CartItem> itemsCopy = new ArrayList<>(cart.getItems());
+        for (CartItem item : itemsCopy) {
+            if (item.getName().equals(cartItem.getTitle())) {
                 cart.getItems().remove(item);
                 break;
             }
@@ -80,12 +55,10 @@ public class User {
     }
 
     public void checkout() {
-        Order order = new Order(cart, this.subscription);
-        order.setShippingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
-        order.setBillingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
+        LocalDate currentDate = LocalDate.now();
+        Order order = new Order(cart, this);
         order.setOrderStatus("Order Placed");
-        order.setDateCreated("2024-01-01");
-        order.setUserName(this.name);
+        order.setDateCreated(currentDate);
         orders.add(order);
     }
 }
